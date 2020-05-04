@@ -1,0 +1,23 @@
+
+$mainColor: #019a4a;
+$bdRadius: 5px 5px;
+$gWidth: 240px;
+$gMergin: 16px;
+@mixin grid($numberColumns) {
+
+  @if($numberColumns > 1){
+    max-width: $gWidth * $numberColumns + $gMergin * ($numberColumns - 1);
+    .note{
+      margin-right: $gMergin;
+      &:nth-child(#{$numberColumns}n){
+        margin-right: 0px;
+      }
+    }
+  }
+  @else{
+    .note{
+      margin-right: 0px;
+      width: 100%;
+    }
+  }
+}

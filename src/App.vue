@@ -1,28 +1,67 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view v-if="this.showPage" @openPopup="openPopup"/>
+    <VuePopup
+      v-if="this.showPopup"
+      :options="this.options"
+      @closePopup="closePopup()"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VuePopup from './components/VuePopup'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      showPopup: true,
+      showPage: false,
+      options: null
+    }
+  },
   components: {
-    HelloWorld
+    VuePopup
+  },
+  methods: {
+    closePopup(){
+      this.showPopup = false
+    },
+    openPopup(options){
+      this.options = options
+      this.showPopup = true
+    }
+  },
+  created() {
+    this.openPopup({
+      textBody: 'Соединение с сервером ...',
+      canClose: false
+    });
+
+    this.$store.dispatch('runServer').then(
+      () => {
+        this.openPopup({
+          textHead: 'Готово!',
+          textBody: 'Данные с сервера получены',
+          timeOut: {
+            delay: 1000,
+            cb: popup => {
+              popup.close()
+              this.showPage = true
+            }
+          }
+        });
+      },
+      () => {
+        this.openPopup({
+          textHead: 'Ошибка',
+          textBody: `Приносим свои извинения, но в данный момент сервер не отвечает.<br>
+            Попробуйте зайти на сайт позже ...`,
+          canClose: false
+        });    
+      }
+    )
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

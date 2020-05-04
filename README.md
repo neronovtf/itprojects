@@ -1,4 +1,4 @@
-# itprojects_3
+# itprojects
 
 ## Project setup
 ```
