@@ -1,24 +1,23 @@
 # itprojects
+this is the repository for the test task
 
-## Project setup
+## Setup and run project
 ```
+git clone https://github.com/neronovtf/itprojects.git
+
+cd itprojects
+
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
+This will run server available on localhost:`<assigned-port>` for local viewing
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### To create the project were used:
+1. **Axios** `npm install axios`
+2. **VueRouter** `npm install vue-router`
+3. **SCSS** `npm install -g sass`
 
-### Lints and fixes files
-```
-npm run lint
-```
+*Thanks for stopping by my repository =)*
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> Neronov Timur, may 2020
